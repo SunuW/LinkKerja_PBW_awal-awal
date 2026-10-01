@@ -19,3 +19,8 @@ Route::get('/test-login', function () {
 Route::get('/test-register', function () {
     return view('auth.register');
 });
+
+
+Route::get('/', function () {
+    return view('welcome');
+});

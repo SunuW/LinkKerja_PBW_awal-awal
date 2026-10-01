@@ -4,12 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LinkKerja - @yield('judul', 'Dashboard')</title>
-        <link rel="stylesheet" href="{{ asset('css/stle.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     </head>
     <body>
         <div class="app-shell">
             <!-- memanggil file header -->
-            @include('partial.header')
+            @include('partials.header')
 
             <main class="main">
                 <div class="top-bar">
@@ -18,7 +18,7 @@
                         <p>@yield('subjudul', '')</p>
                     </div>
                     @if(auth()->check())
-                    <div style="display:flex, align-items:center; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:12px;">
                         <div class="user">
                             <div class="avatar">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
                             <div>

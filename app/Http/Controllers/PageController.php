@@ -3,17 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\lowongan;
+use App\Models\Lamaran;
 
-class AuthController extends Controller
+class PageController extends Controller
 {
-    public function showLogin()
+    public function dashboardPerekrut()
     {
-        return view('auth.login');
+        $jumlahLowonganAktif = Lowongan::where('status', 'aktif')->count();
+        $jumlahLamaran = Lamaran::count();
+        $jumlahDitinjau = Lamaran::where('status', 'ditinjau')->count();
+        $jumlahDiterima = Lamaran::where('status', 'diterima')->count();
+        $lamaranTerbaru = Lamaran::with(['profil.user', 'lowongan'])->latest()->take(5)->get();
+
+        return view('perekrut.dashboard', compact(
+            'jumlahLowonganAktif',
+            'jumlahLamaran',
+            'jumlahDitinjau',
+            'jumlahDiterima',
+            'lamaranTerbaru'
+        ));
     }
 
-    public function showRegister()
+    public function createLowongan()
     {
-        return view('auth.register');
+        return view('perekrut.lowongan.create');
     }
-
 }

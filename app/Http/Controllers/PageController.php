@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\lowongan;
+use App\Models\Lowongan;
 use App\Models\Lamaran;
 
 class PageController extends Controller

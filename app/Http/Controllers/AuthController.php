@@ -17,7 +17,6 @@ class AuthController extends Controller
         return view('auth.login');
     }
  
-    // UC-01 Login: validasi hak akses sesuai peran
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -31,7 +30,9 @@ class AuthController extends Controller
  
         $request->session()->regenerate();
  
-        return $this->halamanUtama();
+        return Auth::user()->isPerekrut()
+            ? redirect()->route('perekrut.dashboard')
+            : redirect()->route('pencari.beranda');
     }
  
     public function showRegister()
@@ -67,7 +68,9 @@ class AuthController extends Controller
  
         Auth::login($user);
  
-        return $this->halamanUtama();
+        return $user->isPerekrut()
+            ? redirect()->route('perekrut.dashboard')
+            : redirect()->route('pencari.beranda');
     }
  
     public function logout(Request $request)
@@ -77,12 +80,5 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
  
         return redirect()->route('login');
-    }
- 
-    private function halamanUtama()
-    {
-        return Auth::user()->isPerekrut()
-            ? redirect()->route('perekrut.profil')
-            : redirect()->route('pencari.beranda');
     }
 }

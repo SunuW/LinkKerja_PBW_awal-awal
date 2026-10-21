@@ -1,12 +1,12 @@
 @extends('layouts.guest')
-
+ 
 @section('judul', 'Masuk')
-
+ 
 @section('hero')
-    <h2>Selamat datang kembali di LinkKerja.</h2>   
+    <h2>Selamat datang kembali di LinkKerja.</h2>
     <p>Masuk untuk melanjutkan sebagai pencari kerja atau perekrut.</p>
 @endsection
-
+ 
 @section('konten')
     <form method="POST" action="{{ route('login') }}">
         @csrf

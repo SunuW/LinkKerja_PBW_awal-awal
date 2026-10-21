@@ -1,12 +1,11 @@
 <?php
- 
+
 namespace App\Models;
- 
+
 use App\Observers\LowonganObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
- 
-// Observer dipanggil otomatis setiap ada lowongan baru (KF-05: email lowongan baru)
+// Observer dipanggil otomatis saat lowongan baru dibuat (KF-05).
 #[ObservedBy([LowonganObserver::class])]
 class Lowongan extends Model
 {
@@ -20,12 +19,17 @@ class Lowongan extends Model
         return $this->belongsTo(Perusahaan::class, 'id_perusahaan');
     }
  
-    // Query scope untuk pencarian dengan filter (KF-03)
+    public function lamaran()
+    {
+        return $this->hasMany(Lamaran::class, 'id_lowongan');
+    }
+    // Query scope untuk pencarian & filter (KF-03, UC-03)
     public function scopeFilter($query, array $data)
     {
         return $query
-            ->when($data['kata_kunci'] ?? null, fn ($q, $v) => $q->where('judul_posisi', 'like', "%{$v}%"))
-            ->when($data['lokasi'] ?? null, fn ($q, $v) => $q->where('lokasi', 'like', "%{$v}%"))
-            ->when($data['bidang'] ?? null, fn ($q, $v) => $q->where('bidang', $v));
+            ->when($data['kata_kunci'] ?? null, fn ($q, $kk) => $q->where(function ($q2) use ($kk) {
+                $q2->where('judul_posisi', 'like', "%{$kk}%")->orWhere('lokasi', 'like', "%{$kk}%");
+            }))
+            ->when($data['bidang'] ?? null, fn ($q, $b) => $q->where('bidang', $b));
     }
 }

@@ -1,7 +1,6 @@
 @extends('layouts.app')
  
 @section('judul', 'Detail Lowongan')
-@section('subjudul', 'Informasi lengkap lowongan pekerjaan.')
 @section('subjudul', 'Tinjau detail sebelum mengirim lamaran.')
  
 @section('konten')
@@ -21,7 +20,6 @@
         <h4>Kriteria</h4>
         <p>{{ $lowongan->kriteria }}</p>
  
-        <p style="color:var(--ink-soft); font-size:0.88rem; margin-bottom:0;">Fitur melamar langsung akan tersedia pada tahap pengembangan berikutnya.</p>
         <form method="POST" action="{{ route('pencari.lamar', $lowongan) }}" enctype="multipart/form-data">
             @csrf
             <div class="field" style="max-width:360px;">

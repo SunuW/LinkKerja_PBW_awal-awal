@@ -54,3 +54,16 @@ Route::middleware(['auth', 'role:pencari_kerja'])->prefix('pencari')->name('penc
     Route::delete('/profil/riwayat/{riwayat}', [ProfilController::class, 'hapusRiwayat'])->name('profil.riwayat.destroy');
     Route::post('/profil/dokumen', [ProfilController::class, 'unggahDokumen'])->name('profil.dokumen.store');
 });
+use App\Http\Controllers\PageController;
+
+Route::get('/', function () {
+    return redirect('/login');
+});
+
+// Route utama untuk halaman Login dan Register lewat AuthController
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+
+// Route untuk Perekrut lewat PageController
+Route::get('/perekrut/dashboard', [PageController::class, 'dashboardPerekrut'])->name('perekrut.dashboard');
+Route::get('/perekrut/lowongan/create', [PageController::class, 'createLowongan'])->name('perekrut.lowongan.create');

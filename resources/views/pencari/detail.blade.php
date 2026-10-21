@@ -2,6 +2,7 @@
  
 @section('judul', 'Detail Lowongan')
 @section('subjudul', 'Informasi lengkap lowongan pekerjaan.')
+@section('subjudul', 'Tinjau detail sebelum mengirim lamaran.')
  
 @section('konten')
     <a href="{{ route('pencari.cari') }}" class="btn btn-ghost">← Kembali ke daftar lowongan</a>
@@ -21,5 +22,13 @@
         <p>{{ $lowongan->kriteria }}</p>
  
         <p style="color:var(--ink-soft); font-size:0.88rem; margin-bottom:0;">Fitur melamar langsung akan tersedia pada tahap pengembangan berikutnya.</p>
+        <form method="POST" action="{{ route('pencari.lamar', $lowongan) }}" enctype="multipart/form-data">
+            @csrf
+            <div class="field" style="max-width:360px;">
+                <label>Unggah dokumen pendukung (PDF/JPG)</label>
+                <input type="file" name="dokumen" accept=".pdf,.jpg,.jpeg" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Lamar Sekarang</button>
+        </form>
     </div>
 @endsection

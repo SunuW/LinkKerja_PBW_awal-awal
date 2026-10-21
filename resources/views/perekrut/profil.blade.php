@@ -5,6 +5,7 @@
  
 @section('konten')
     <div class="card" style="max-width:560px; margin-bottom:16px;">
+    <div class="card" style="max-width:560px;">
         <h3 style="margin-top:0;">Data perusahaan</h3>
         <form method="POST" action="{{ route('perekrut.profil.update') }}">
             @csrf @method('PUT')

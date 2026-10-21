@@ -28,6 +28,26 @@
                     <button type="submit" class="btn btn-primary">Cari</button>
                     <a href="{{ route('pencari.cari') }}" class="btn btn-ghost">Reset</a>
                 </div>
+@section('subjudul', 'Gunakan filter untuk menemukan lowongan yang relevan.')
+ 
+@section('konten')
+    <div class="card" style="margin-bottom:16px;">
+        <form method="GET" action="{{ route('pencari.cari') }}" class="grid-2">
+            <div class="field" style="margin:0;">
+                <label>Kata kunci / lokasi</label>
+                <input type="text" name="kata_kunci" value="{{ request('kata_kunci') }}" placeholder="Contoh: Madiun, Frontend">
+            </div>
+            <div class="field" style="margin:0;">
+                <label>Bidang</label>
+                <select name="bidang">
+                    <option value="">Semua bidang</option>
+                    @foreach (['Teknologi Informasi', 'Desain', 'Pemasaran'] as $bidang)
+                        <option value="{{ $bidang }}" {{ request('bidang') === $bidang ? 'selected' : '' }}>{{ $bidang }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div style="grid-column: 1 / -1;">
+                <button type="submit" class="btn btn-primary">Cari</button>
             </div>
         </form>
     </div>
@@ -40,6 +60,7 @@
                     <div>
                         <div style="font-weight:600;">{{ $l->judul_posisi }}</div>
                         <div style="font-size:0.82rem; color:var(--ink-soft);">{{ $l->perusahaan->nama_perusahaan }} · {{ $l->lokasi }} · {{ $l->bidang }} · {{ ucfirst(str_replace('_', '-', $l->tipe_kerja)) }}</div>
+                        <div style="font-size:0.82rem; color:var(--ink-soft);">{{ $l->perusahaan->nama_perusahaan }} · {{ $l->lokasi }} · {{ ucfirst(str_replace('_', '-', $l->tipe_kerja)) }}</div>
                     </div>
                 </div>
                 <a href="{{ route('pencari.detail', $l) }}" class="btn btn-outline">Lihat Detail</a>

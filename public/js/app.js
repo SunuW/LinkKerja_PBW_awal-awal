@@ -1,6 +1,3 @@
-// LinkKerja — bantuan tampilan kecil (opsional)
-// Dikerjakan oleh: Lathifah Widya Zahra (Frontend)
- 
 // Validasi ekstensi file di sisi klien sebelum dikirim ke server
 // (validasi utama tetap dilakukan Laravel lewat rule "mimes:pdf,jpg,jpeg" pada Controller)
 document.querySelectorAll('input[type="file"][accept]').forEach((input) => {

@@ -9,7 +9,7 @@
         <form method="POST" action="{{ route('pencari.profil.update') }}">
             @csrf @method('PUT')
             <div class="grid-2">
-                <div class="field"><label>Nama lengkap</label><input value="{{ auth()->user()->name }}" disabled></div>
+                <div class="field"><label>Nama lengkap</label><input value="{{ auth()->user()->name }}" ></div>
                 <div class="field"><label>No. telepon</label><input name="no_telepon" value="{{ old('no_telepon', $profil->no_telepon) }}"></div>
             </div>
             <div class="field"><label>Alamat</label><input name="alamat" value="{{ old('alamat', $profil->alamat) }}"></div>

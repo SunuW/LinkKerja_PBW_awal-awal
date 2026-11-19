@@ -6,16 +6,6 @@
 @section('konten')
     <div class="card">
         <h3 style="margin-top:0;">Rekomendasi untuk Anda</h3>
- 
-        @if ($riwayat->isNotEmpty())
-            <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:-6px;">
-                Berdasarkan pencarian Anda:
-                {{ $riwayat->pluck('bidang')->merge($riwayat->pluck('lokasi'))->filter()->unique()->implode(', ') }}
-            </p>
-        @else
-            <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:-6px;">Belum ada riwayat pencarian — menampilkan lowongan terbaru. Coba menu Cari Lowongan agar rekomendasi lebih sesuai.</p>
-        @endif
- 
         @forelse ($rekomendasi as $l)
             <div class="row">
                 <div style="display:flex; gap:12px; align-items:center;">

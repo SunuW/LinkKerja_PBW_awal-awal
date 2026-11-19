@@ -30,4 +30,9 @@ class ProfilPencariKerja extends Model
     {
         return $this->hasMany(Dokumen::class, 'id_profil');
     }
+
+    public function lamaran()
+    {
+        return $this->hasMany(Lamaran::class, 'id_profil', 'id_profil');
+    }
 }

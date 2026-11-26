@@ -18,9 +18,9 @@ class User extends Authenticatable
         return ['password' => 'hashed'];
     }
  
-    public function profilPencariKerja()
+     public function profilPencariKerja()
     {
-        return $this->hasOne(ProfilPencariKerja::class, 'id_user');
+    return $this->hasOne(ProfilPencariKerja::class, 'id_user', 'id_user');
     }
  
     public function perusahaan()

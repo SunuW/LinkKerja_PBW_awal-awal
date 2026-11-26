@@ -7,7 +7,7 @@ use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
  
-Route::redirect('/', '/register');
+Route::redirect('/', '/beranda');
  
 // ---------- Auth (tamu) ----------
 Route::middleware('guest')->group(function () {

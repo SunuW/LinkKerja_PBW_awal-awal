@@ -69,15 +69,21 @@ class LowonganController extends Controller
  
     // Cari Lowongan dengan filter (KF-03, UC-03)
     public function cari(Request $request)
-    {
-        $lowongan = Lowongan::where('status', 'aktif')
-            ->filter($request->only('kata_kunci', 'bidang'))
-            ->with('perusahaan')
-            ->latest()
-            ->get();
- 
-        return view('pencari.cari', compact('lowongan'));
-    }
+{
+    $lowongan = Lowongan::where('status', 'aktif')
+        ->filter($request->only('kata_kunci', 'bidang'))
+        ->with('perusahaan')
+        ->latest()
+        ->get();
+
+    $daftarBidang = Lowongan::where('status', 'aktif')
+        ->whereNotNull('bidang')
+        ->where('bidang', '!=', '')
+        ->distinct()
+        ->pluck('bidang');
+
+    return view('pencari.cari', compact('lowongan', 'daftarBidang'));
+}
  
     // Detail Lowongan (UC-04)
     public function show(Lowongan $lowongan)

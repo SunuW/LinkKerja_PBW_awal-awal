@@ -25,13 +25,16 @@ class DashboardController extends Controller
  
     // Beranda Pencari Kerja — rekomendasi lowongan (KF-04)
     public function pencari()
-    {
-        $rekomendasi = \App\Models\Lowongan::where('status', 'aktif')
-            ->with('perusahaan')
-            ->latest()
-            ->take(3)
-            ->get();
- 
-        return view('pencari.beranda', ['rekomendasi' => $rekomendasi]);
-    }
+{
+    $rekomendasi = \App\Models\Lowongan::where('status', 'aktif')
+        ->with('perusahaan')
+        ->latest()
+        ->take(3)
+        ->get();
+
+    return view('pencari.beranda', [
+        'rekomendasi' => $rekomendasi,
+        'riwayat' => collect(),
+    ]);
+}
 }
